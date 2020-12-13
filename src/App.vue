@@ -1,32 +1,64 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+
+      <Header />
+      <div class="tab  border-1px">
+          <div class="tab-item">
+              <router-link to="/goods">商品</router-link>
+          </div>
+          <div class="tab-item">
+              <router-link to="/ratings">评论</router-link>
+
+          </div>
+          <div class="tab-item">
+              <router-link to="seller">商家</router-link>
+          </div>
+      </div>2
+      <!-- 路由出口 -->
+      <!-- 路由匹配到的组件将渲染在这里 -->
+     <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+    import Header from '@/components/header/header'
+    export default {
+        components:{
+            Header
+        }
     }
-  }
+
+
+
+</script>
+
+<style lang="scss">
+@import "common/scss/mixin";
+
+#app{
+    .tab{
+        display: flex;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        //border-bottom: 1px solid rgba(7,17,27,0.1);
+        @include border-1px(rgba(7,17,27,0.1));
+        .tab-item{
+            flex: 1;
+            text-align: center;
+            //导航标签
+            & > a{
+                display: block;
+                font-size: 14px;
+                color: rgb(77,85,93);
+                //当前活动路由标签
+                &.active{
+                    color: rgb(240,20,20);
+                }
+            }
+        }
+    }
 }
+
+
 </style>
