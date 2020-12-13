@@ -1,7 +1,9 @@
 <template>
   <div id="app">
 
-      <Header />
+      <Header
+        :seller="seller"
+      />
       <div class="tab  border-1px">
           <div class="tab-item">
               <router-link to="/goods">商品</router-link>
@@ -13,7 +15,7 @@
           <div class="tab-item">
               <router-link to="seller">商家</router-link>
           </div>
-      </div>2
+      </div>
       <!-- 路由出口 -->
       <!-- 路由匹配到的组件将渲染在这里 -->
      <router-view />
@@ -22,7 +24,23 @@
 
 <script>
     import Header from '@/components/header/header'
+    //无错误标志
+    const ERR_OK = 0
+
     export default {
+        data(){
+          return{
+              seller:{},//商家
+          }
+        },
+        created() {
+          this.$http.get('/api/seller').then((response)=>{
+              response = response.body
+              if (response.errno === ERR_OK){
+                    this.seller = response.data
+              }
+          })
+        },
         components:{
             Header
         }
